@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    {% include 'partials/_topbar.html'%}
+    {% include 'partials/_navbar.html'%}
+    {% block content %} {% endblock %}
+    {% include 'partials/_footer.html'%}
+</body>
+
+</html>

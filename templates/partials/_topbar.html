@@ -1,0 +1,13 @@
+<div class="topbar">
+    <div class="container topbar-content">
+        <div class="topbar-links">
+            <div class="topbar-actions">
+                <li><a href="{% url 'pages:index' %}">Home</a></li>
+            </div>
+
+            {% comment %} <div class="topbar-actions">
+                {% if user.is_authenticated %}
+            </div> {% endcomment %}
+        </div>
+    </div>
+</div>

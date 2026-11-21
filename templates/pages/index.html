@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Hello World</h1>
+
+
+{% block title %}Book Management - Home{% endblock %}
+
+
+<div class="container">
+    <!-- Add Book Form -->
+    <h2>Add a New Book</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Add Book</button>
+    </form>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- Book List -->
+    <h2>Book Collection</h2>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li style="margin-bottom: 15px;">
+                    <strong>#{{ book.pk_id }} - {{ book.title }}</strong> ({{ book.publication_year }})<br>
+                    
+                    <strong>Authors:</strong>
+                    {% for author in book.authors.all %}
+                        {{ author.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+                    <br>
+
+                    <strong>Genres:</strong>
+                    {% for genre in book.genres.all %}
+                        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        None
+                    {% endfor %}
+                    <br>
+
+                    <strong>ISBN:</strong> {{ book.isbn }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books added yet.</p>
+    {% endif %}
+</div>
+
+
+{% endblock %}
