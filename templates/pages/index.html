@@ -17,7 +17,7 @@
     <!-- Book List -->
     <h2>Book Collection</h2>
     {% if books %}
-        <ul>
+        <ul style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; list-style: none; padding: 0;">
             {% for book in books %}
                 <li style="margin-bottom: 15px;">
                     {% if book.book_cover %}
