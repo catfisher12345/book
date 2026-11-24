@@ -138,6 +138,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 # Default primary key field type

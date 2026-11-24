@@ -10,3 +10,4 @@ def search_genres(request):
     genres = Genre.objects.filter(name__icontains=query)[:20]
     results = [{'id': g.id, 'text': g.name} for g in genres]
     return JsonResponse({'results': results})
+

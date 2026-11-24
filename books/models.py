@@ -21,6 +21,11 @@ class Book(models.Model):
     genres = models.ManyToManyField(Genre, related_name='books')
     isbn = models.CharField(max_length=13, unique=True)
     publication_date = models.DateField()
+    book_cover = models.ImageField(
+        upload_to='book_covers/', 
+        blank=True, 
+        null=True
+    )
 
     def __str__(self):
         return self.title

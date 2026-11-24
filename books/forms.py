@@ -17,12 +17,12 @@ class BookForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Genre 1, Genre 2'})
     )
     # Define the exact display sequence here
-    field_order = ['title', 'authors_input', 'genres_input', 'isbn', 'publication_date']
+    field_order = ['title', 'authors_input', 'genres_input', 'isbn', 'publication_date','book_cover']
 
     class Meta:
         model = Book
         # Exclude the actual ManyToMany fields from the form UI
-        fields = ['title', 'isbn', 'publication_date']
+        fields = ['title', 'isbn', 'publication_date', 'book_cover']
         widgets = {
             "publication_date": InlineSelectDateWidget(
                 years=range(2026, 1899, -1),

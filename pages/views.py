@@ -4,7 +4,7 @@ from books.forms import BookForm
 
 def index(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('pages:index')
