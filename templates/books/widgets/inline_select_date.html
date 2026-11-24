@@ -1,0 +1,8 @@
+<div class="segmented-date-box">
+  {% for subwidget in widget.subwidgets %}
+    {% include subwidget.template_name with widget=subwidget %}
+    {% if not forloop.last %}
+      <span class="date-sep">/</span>
+    {% endif %}
+  {% endfor %}
+</div>

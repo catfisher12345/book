@@ -1,6 +1,9 @@
 from django import forms
 from .models import Book, Author, Genre
 
+class InlineSelectDateWidget(forms.SelectDateWidget):
+    template_name = "books/widgets/inline_select_date.html"
+
 class BookForm(forms.ModelForm):
     # Add text fields for user input
     authors_input = forms.CharField(
@@ -14,12 +17,19 @@ class BookForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Genre 1, Genre 2'})
     )
     # Define the exact display sequence here
-    field_order = ['title', 'authors_input', 'genres_input', 'isbn', 'publication_year']
+    field_order = ['title', 'authors_input', 'genres_input', 'isbn', 'publication_date']
 
     class Meta:
         model = Book
         # Exclude the actual ManyToMany fields from the form UI
-        fields = ['title', 'isbn', 'publication_year']
+        fields = ['title', 'isbn', 'publication_date']
+        widgets = {
+            "publication_date": InlineSelectDateWidget(
+                years=range(2026, 1899, -1),
+                months={i: f"{i:02d}" for i in range(1, 13)},  # Shows 01, 02, 03...
+                empty_label=("0000", "00", "00"),  # Year, Month, Day placeholders
+            )
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -20,7 +20,7 @@
         <ul>
             {% for book in books %}
                 <li style="margin-bottom: 15px;">
-                    <strong>#{{ book.pk_id }} - {{ book.title }}</strong> ({{ book.publication_year }})<br>
+                    <strong>#{{ book.pk_id }} - {{ book.title }}</strong> ({{ book.publication_date }})<br>
                     
                     <strong>Authors:</strong>
                     {% for author in book.authors.all %}

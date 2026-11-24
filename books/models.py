@@ -20,7 +20,7 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author, related_name='books')
     genres = models.ManyToManyField(Genre, related_name='books')
     isbn = models.CharField(max_length=13, unique=True)
-    publication_year = models.PositiveIntegerField()
+    publication_date = models.DateField()
 
     def __str__(self):
         return self.title
