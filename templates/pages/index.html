@@ -28,18 +28,23 @@
 
     <!-- Export / Import Section -->
     <h2>Export & Import Books (CSV)</h2>
-    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-        <a href="{% url 'pages:export_books' %}" class="btn">Export Books to CSV</a>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <a href="{% url 'pages:export_books' %}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; height: 34px; box-sizing: border-box; font-size: 14px;">
+            Export Books to CSV
+        </a>
 
-        <form method="POST" action="{% url 'pages:import_books' %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center;">
+        <form method="POST" action="{% url 'pages:import_books' %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; margin: 0;">
             {% csrf_token %}
+            <button type="submit" class="btn" style="display: inline-flex; align-items: center; height: 34px; box-sizing: border-box; font-size: 14px;">
+                Import CSV
+            </button>
             <input type="file" name="csv_file" accept=".csv" required>
-            <button type="submit" class="btn">Import CSV</button>
         </form>
     </div>
     <small style="display: block; margin-top: 6px; color: #666;">
         CSV columns required: <code>title, authors, genres, isbn, publication_date</code> (YYYY-MM-DD)
     </small>
+
 
     <hr style="margin: 30px 0;">
 
