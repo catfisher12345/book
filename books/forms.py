@@ -50,7 +50,28 @@ class BookForm(forms.ModelForm):
             self._save_m2m_from_text(book)
         return book
 
+    def _get_or_create_ci(self, model, raw_name):
+        clean_name = " ".join(raw_name.split())  # Strips outer & double inner spaces
+        obj = model.objects.filter(name__iexact=clean_name).first()
+        if not obj:
+            obj = model.objects.create(name=clean_name)
+        return obj
+
     def _save_m2m_from_text(self, book):
+        # 1. Process Authors
+        author_names = [
+            name for name in self.cleaned_data['authors_input'].split(',') if name.strip()
+        ]
+        author_objs = [self._get_or_create_ci(Author, name) for name in author_names]
+        book.authors.set(author_objs)
+
+        # 2. Process Genres
+        genre_names = [
+            name for name in self.cleaned_data['genres_input'].split(',') if name.strip()
+        ]
+        genre_objs = [self._get_or_create_ci(Genre, name) for name in genre_names]
+        book.genres.set(genre_objs)
+
         # 1. Process Authors
         author_names = [
             name.strip() for name in self.cleaned_data['authors_input'].split(',') if name.strip()
